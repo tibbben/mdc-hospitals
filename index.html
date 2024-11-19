@@ -11,7 +11,7 @@
   </head>
   <body>
     <h1>MDC Hospitals</h1>
-    <div id="map" style="height: 180px;"></div>
+    <div id="map" style="height: 500px;"></div>
     <script>
       var map = L.map('map').setView([25.76, -80.2], 12);
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -20,7 +20,10 @@
       }).addTo(map);
       let url = 'https://hub.arcgis.com/api/v3/datasets/0067a0e8b40644f980afa23ad34c32c4_0/downloads/data?format=geojson&spatialRefId=4326&where=1%3D1'
       const response = fetch(url).then(response => response.json()).then(response => {
-        L.geoJson(response).addTo(map);
+        L.geoJson(response,{
+          onEachFeature: function (feature, layer) {
+            layer.bindPopup(feature.properties.NAME);
+        }).addTo(map);
       })
     </script>
   </body>
