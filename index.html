@@ -23,6 +23,7 @@
         L.geoJson(response,{
           onEachFeature: function (feature, layer) {
             layer.bindPopup(feature.properties.NAME);
+          }
         }).addTo(map);
       })
     </script>
